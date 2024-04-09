@@ -9,31 +9,30 @@ body {
 
 #game-container {
   display: flex;
-  width: 100vw;
-  padding: 20px 0px;
+  
   justify-content: center;
 }
 
 #game-screen {
   display: none;
   align-content: center;
-  padding: 20px 0px;
+  padding: 30px 0px;
   overflow: hidden;
   position: relative;
-  background-image: url(../images/road.png);
+  background-image: url(../images/backgroung.jpg);
   background-size: cover;
-  animation: slide 5s linear infinite;
+  animation: scroll-horizontal 5s linear infinite;
 }
 
-@keyframes slide {
+@keyframes scroll-horizontal {
   0% {
-    background-position: 0 -1000px;
+    background-position:  1000px 0;
   }
   95% {
     background-position: 0 0;
   }
   100% {
-    background-position: 0 50px;
+    background-position:  -50px 0;
   }
 }
 
