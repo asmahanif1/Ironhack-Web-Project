@@ -10,7 +10,7 @@ class Player {
       this.element = document.createElement("img");
   
       this.element.src = imgSrc;
-      //this.element.style.position = "center";
+      this.element.style.position = "absolute";
       // Set up the default element's property values
       this.element.style.width = `${width}px`;
       this.element.style.height = `${height}px`;
@@ -22,7 +22,7 @@ class Player {
   
     move() {
       // Update player's car position based on directionX and directionY
-      this.left += this.directionX;
+      this.left += this.directionX; 
       this.top += this.directionY;
   
       // Ensure the player's car stays within the game screen
