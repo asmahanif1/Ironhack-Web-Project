@@ -3,16 +3,19 @@ class Obstacle {
       this.gameScreen = gameScreen;
       this.left = 500
       this.top = Math.floor(Math.random() * 300 + 70);;
-      this.width = 100;
+      this.width = 150;
       this.height = 150;
       this.element = document.createElement("img");
-  
+
+      this.sound = new Audio(`./sounds/bigfish.wav`);
+      this.collisionSound = new Audio(`./sounds/obstacle.wav`)
       this.element.src = "./images/hurdle1.png";
       this.element.style.position = "absolute";
       this.element.style.width = `${this.width}px`;
       this.element.style.height = `${this.height}px`;
       this.element.style.left = `${this.left}px`;
       this.element.style.top = `${this.top}px`;
+
   
       this.gameScreen.appendChild(this.element);
     }

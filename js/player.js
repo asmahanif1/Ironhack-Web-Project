@@ -55,21 +55,22 @@ class Player {
       this.element.style.top = `${this.top}px`;
     }
   
-    didCollide(obstacle) {
-      const playerRect = this.element.getBoundingClientRect();
-      const obstacleRect = obstacle.element.getBoundingClientRect();
-  
-      if (
-        playerRect.left < obstacleRect.right &&
-        playerRect.right > obstacleRect.left &&
-        playerRect.top < obstacleRect.bottom &&
-        playerRect.bottom > obstacleRect.top
-      ) {
-        return true;
-      } else {
-        return false;
+     didCollide(obstacle) {
+        const playerRect = this.element.getBoundingClientRect();
+        const obstacleRect = obstacle.element.getBoundingClientRect();
+    
+        if (
+          playerRect.left < obstacleRect.right-10 &&
+          playerRect.right > obstacleRect.left+10 &&
+          playerRect.top < obstacleRect.bottom-10 &&
+          playerRect.bottom > obstacleRect.top+10
+        ) {
+            obstacle.collisionSound.play();
+            obstacle.sound.pause();
+          return true;
+        } else {
+          return false;
+        }
       }
-    }
-  
   
   }

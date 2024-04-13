@@ -11,9 +11,12 @@ class Game {
         150,
         "./images/fish.png"
       );
+
+      this.sound = new Audio(`./sounds/gameSound.wav`);
       this.height = 600;
       this.width = 500;
       this.obstacles = [];
+      this.bonuses = [];
       this.score = 0;
       this.lives = 3;
       this.gameIsOver = false;
@@ -50,11 +53,15 @@ class Game {
     }
   
     update() {
+        
+            
+       
       this.player.move();
        // Check for collision and if an obstacle is still on the screen
     for (let i = 0; i < this.obstacles.length; i++) {
         const obstacle = this.obstacles[i];
         obstacle.move();
+        obstacle.sound.play();
   
         // If the player's car collides with an obstacle
         if (this.player.didCollide(obstacle)) {
@@ -69,20 +76,48 @@ class Game {
           // Update the counter variable to account for the removed obstacle
           i--;
           console.log(obstacle.left,this.width)
-        } // If the obstacle is off the screen (at the bottom)
+        } // If the obstacle is off the screen (at the left)
         else if (obstacle.left < 0) {
           // Increase the score by 1
           this.score++;
           document.getElementById("score").innerText = this.score;
           // Remove the obstacle from the DOM
           obstacle.element.remove();
+          obstacle.sound.pause();
           // Remove obstacle object from the array
           this.obstacles.splice(i, 1);
           // Update the counter variable to account for the removed obstacle
           i--;
         }
       }
+      for (let i = 0; i < this.bonuses.length; i++) {
+        const bonus = this.bonuses[i];
+        bonus.move();
   
+        // If the player's car collides with an obstacle
+        if (this.player.didCollide(bonus)) {
+          // Remove the obstacle element from the DOM
+          bonus.element.remove();
+          // Remove obstacle object from the array
+          this.bonuses.splice(i, 1);
+          // Reduce player's lives by 1
+          this.score += 5;
+          
+          document.getElementById("score").innerText = this.score;
+          // Update the counter variable to account for the removed obstacle
+          i--;
+       
+        } // If the obstacle is off the screen (at the left)
+        else if (bonus.top > this.height) {
+          
+          // Remove the obstacle from the DOM
+          bonus.element.remove();
+          // Remove obstacle object from the array
+          this.bonuses.splice(i, 1);
+          // Update the counter variable to account for the removed obstacle
+          i--;
+        }
+      }
       // If the lives are 0, end the game
       if (this.lives === 0) {
         this.endGame();
@@ -90,16 +125,22 @@ class Game {
   
       // Create a new obstacle based on a random probability
       // when there is no other obstacles on the screen
+      if (Math.random() > 0.98 && this.bonuses.length < 1) {
+        this.bonuses.push(new Bonus(this.gameScreen));
+      }
       if (Math.random() > 0.98 && this.obstacles.length < 1) {
-
-
         this.obstacles.push(new Obstacle(this.gameScreen));
+        
       }
     }
+
+   
+    
+    
     endGame() {
         this.player.element.remove();
         this.obstacles.forEach(obstacle => obstacle.element.remove());
-    
+        this.bonuses.forEach(bonus=> bonus.element.remove());
         this.gameIsOver = true;
     
         // Hide game screen
