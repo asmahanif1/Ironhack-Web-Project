@@ -3,6 +3,7 @@ class Game {
       this.startScreen = document.getElementById("game-intro");
       this.gameScreen = document.getElementById("game-screen");
       this.gameEndScreen = document.getElementById("game-end");
+      
       this.player = new Player(
         this.gameScreen,
         200,
@@ -138,6 +139,7 @@ class Game {
     
     
     endGame() {
+
         this.player.element.remove();
         this.obstacles.forEach(obstacle => obstacle.element.remove());
         this.bonuses.forEach(bonus=> bonus.element.remove());
