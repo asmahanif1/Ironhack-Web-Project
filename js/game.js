@@ -30,6 +30,7 @@ class Game {
       this.gameScreen.style.height = `${this.height}px`;
       this.gameScreen.style.width = `${this.width}px`;
       this.sound.play();
+      this.sound.loop = true; 
   
       // Hide the start screen
       this.startScreen.style.display = "none";
