@@ -3,7 +3,7 @@ class Game {
       this.startScreen = document.getElementById("game-intro");
       this.gameScreen = document.getElementById("game-screen");
       this.gameEndScreen = document.getElementById("game-end");
-      
+console.log(this.gameScreen)
       this.player = new Player(
         this.gameScreen,
         200,
@@ -12,6 +12,11 @@ class Game {
         150,
         "./images/fish.png"
       );
+
+      this.lives1 = document.getElementById("one")
+      this.lives2 = document.getElementById("two")
+      this.lives3 = document.getElementById("three")
+      console.log(this.lives1, this.lives2, this.lives3);
 
       this.sound = new Audio(`./sounds/gameSound.wav`);
       this.height = 600;
@@ -76,6 +81,17 @@ class Game {
           this.lives--;
           
           document.getElementById("lives").innerText = this.lives;
+          
+          if(this.lives == "2"){
+            this.lives3.style.display = "none";
+          }
+          if(this.lives == "1"){
+            this.lives2.style.display = "none";
+          }
+          if(this.lives == "0"){
+            this.lives1.style.display = "none";
+          }
+
           // Update the counter variable to account for the removed obstacle
           i--;
           console.log(obstacle.left,this.width)

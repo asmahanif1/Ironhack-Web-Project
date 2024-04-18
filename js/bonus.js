@@ -4,7 +4,7 @@ class Bonus extends Obstacle{
         this.gameScreen = gameScreen;
         this.left = Math.floor(Math.random() * 300 + 70);
         this.top = 0;
-        this.width = 70;
+        this.width = 80;
         this.height = 70;
         this.element = document.createElement("img");
         this.collisionSound = new Audio(`./sounds/bonus.wav`)
